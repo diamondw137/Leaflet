@@ -17,8 +17,7 @@ function createFeatures(earthquakeData) {
 
   // creation of Geolayer
   var earthquakes = L.geoJSON(earthquakeData, {
-    onEachFeature: onEachFeature
-        pointToLayer: function (feature, latlng) {
+    onEachFeature: function (feature, latlng) {
       var geojsonMarkerOptions = {
         radius: 7 * feature.properties.mag,
         fillColor: getColor(feature.properties.mag),
@@ -26,7 +25,7 @@ function createFeatures(earthquakeData) {
         weight: 1,
         fillOpacity: 0.7
       };
-      return L.circleMarker(latlng, geojsonMarkerOptions)
+      return L.circleMarker(latlng, geojsonMarkerOptions);
     }
   });
 
@@ -37,6 +36,7 @@ function createFeatures(earthquakeData) {
         color <= 4.5 ? 'yellow' :
           color <= 6.5 ? 'orange' :
             'red';
+  }
 
     // placing earthquake layer to createMap function
     createMap(earthquakes);
@@ -144,4 +144,4 @@ function createFeatures(earthquakeData) {
     }
 
     legend.addTo(myMap);
-  }
+  };
